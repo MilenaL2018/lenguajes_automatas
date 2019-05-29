@@ -1,5 +1,5 @@
 
-document.getElementById("cargaCatalogo").addEventListener("click", cargarCatalogo);
+/*document.getElementById("cargaCatalogo").addEventListener("click", cargarCatalogo);
 function cargarCatalogo() {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
@@ -22,4 +22,30 @@ function cargarXML(xml) {
         tabla += "</td></tr>";
     }
     document.getElementById("demo").innerHTML = tabla;
-}
+}*/
+
+window.onload = function() {
+    var fileInput = document.getElementById('inputFiles');
+    var fileDisplayArea = document.getElementById('showData');
+
+    fileInput.addEventListener('change', function(e) {
+        var file = fileInput.files[0];
+        var textType = /text.*/;
+
+        if (file.type.match(textType)) {
+            var reader = new FileReader();
+
+            reader.readAsText(file);
+
+            reader.onload = function(e) {
+                fileDisplayArea.innerText = reader.result;
+                mijson = JSON.parse(reader.result);
+
+                alert(mijson.alfabeto);
+            };
+
+        } else {
+            fileDisplayArea.innerText = "File not supported!";
+        }
+    });
+};

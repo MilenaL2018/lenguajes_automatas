@@ -7,15 +7,38 @@
     <title>Automatas</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="script" href="automatas.js">
+    <script src="automatas.js"></script>
 </head>
 
 <body>
-<div id="texto">
-    <h1>Autómatas</h1>
-    <button id="inicio">Inicio</button>
-</div>
-<table id="demo"></table>
+
+    <div id="texto">
+
+        <h1>Autómatas</h1>
+
+        <p>Ejemplo de automata</p>
+        <p>{
+            "automata" : "AD"/"AP"/"MT",
+            "alfabeto": [ 0, 1 ],
+            "estadoInicial": "qo",
+            "estados": ["q0", "q1"],
+            "estadosSalida": ["q1"],
+            "transiciones": [
+            {
+            "actual": "qo",
+            "valor": 0,
+            "proximo": "q1"
+            }
+            ]
+            }</p>
+
+
+        <input type="file" id="inputFiles">
+
+        <div id="showData"></div>
+
+    </div>
+
 
 
 
