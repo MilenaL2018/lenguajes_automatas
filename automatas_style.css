@@ -3,20 +3,25 @@
     width: 18rem;
 }
 
-#myTitle{
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
 #myFile{
     margin-top: 40em;
 }
 
 #myCanvas{
-    width: 500px;
+    width: 100%;
     height:400px;
 }
 
 a{
     color: black;
+}
+
+.myMenu{
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+#myButton{
+    margin-top: 5%;
+    height: 4em;
 }
