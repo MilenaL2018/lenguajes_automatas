@@ -1,9 +1,18 @@
 
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
+.card{
+    width: 18rem;
 }
 
-th, td {
-    padding: 5px;
+#myTitle{
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+#myFile{
+    margin-top: 40em;
+}
+
+#myCanvas{
+    width: 800px;
+    height:800px;
 }
