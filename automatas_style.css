@@ -4,8 +4,8 @@
 }
 
 #myTitle{
-    margin-top: 40px;
-    margin-bottom: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 #myFile{
@@ -13,6 +13,10 @@
 }
 
 #myCanvas{
-    width: 800px;
-    height:800px;
+    width: 500px;
+    height:400px;
+}
+
+a{
+    color: black;
 }
