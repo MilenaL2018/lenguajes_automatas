@@ -51,65 +51,30 @@ window.onload = function() {
 };
 
 
-onclick = function () {
-    var canvas = document.getElementById('canvasId');
-    var context = canvas.getContext('2d');
 
-        // do some drawing
-    //context.clear();
-
-    // do some more drawing
-   // context.setTransform(-1, 0, 0, 1, 200, 200);
-        // do some drawing with the new transform
-   // context.clear(true);
-        // draw more, still using the preserved transform
-    };
-
-function drawState(){
-    var canvas;
-    canvas = document.getElementById("myCanvas");
-    var ctx;
-    ctx = canvas.getContext("2d");
-    ctx.arc(50, 50, 10, 0, 2 * Math.PI);
+function drawState() {
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    ctx.beginPath();
+    ctx.arc(50, 50, 15, 0, 2 * Math.PI);
+    ctx.strokeStyle = "#000000";
     ctx.stroke();
-    console.log(canvas);
-
 }
 
-window.onload = function drawJump() {
-    var canvas = document.getElementById('canvas');
-    var ctx = canvas.getContext('2d');
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    arrow({x: 10, y: 10}, {x: 100, y: 170}, 10);
-    arrow({x: 40, y: 250}, {x: 10, y: 70}, 5);
-
-
-    function arrow (p1, p2, size) {
-        var angle = Math.atan2((p2.y - p1.y) , (p2.x - p1.x));
-        var hyp = Math.sqrt((p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y));
-
-        ctx.save();
-        ctx.translate(p1.x, p1.y);
-        ctx.rotate(angle);
-
-        // line
-        ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.lineTo(hyp - size, 0);
-        ctx.stroke();
-
-        // triangle
-        ctx.fillStyle = 'blue';
-        ctx.beginPath();
-        ctx.lineTo(hyp - size, size);
-        ctx.lineTo(hyp, 0);
-        ctx.lineTo(hyp - size, -size);
-        ctx.fill();
-
-        ctx.restore();
-    }
+ function drawJump() {
+     var c = document.getElementById("myCanvas");
+     var ctx = c.getContext("2d");
+     ctx.beginPath();
+     // Staring point (10,45)
+     ctx.moveTo(10,45);
+     // End point (180,47)
+     ctx.lineTo(180,47);
+     // Make the line visible
+     ctx.strokeStyle = "#000000";
+     ctx.stroke();
 }
+
 
 
 function drawAFD() {
@@ -117,8 +82,9 @@ function drawAFD() {
     canvas = document.getElementById("myCanvas");
     var ctx;
     ctx = canvas.getContext("2d");
-    ctx.arc(50, 50, 10, 0, 2 * Math.PI);
-    ctx.stroke();
+    //ctx.arc(50, 50, 10, 0, 2 * Math.PI);
+    //ctx.stroke();
+    ctx.fillRect(50, 50, 80, 80);
     console.log(canvas);
 
 }
@@ -128,7 +94,7 @@ function drawAP(){
     canvas = document.getElementById("myCanvas");
     var ctx;
     ctx = canvas.getContext("2d");
-    ctx.fillRect(50, 50, 80, 80);
+
     console.log(canvas);
 }
 
@@ -141,3 +107,5 @@ function drawMT(){
     console.log(canvas);
     ctx.clear(true)
 }
+
+

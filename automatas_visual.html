@@ -66,26 +66,27 @@
         </div>
 
 
-        <div class="col-3 text center myMenu">
+        <div class="col-3 text-center myMenu">
             <div class="card">
-                <div class="card-header alert alert-dark">Ingrese cadena</div>
+                <div class="card-header alert alert-dark text-center">Ingrese cadena</div>
                 <div class="col-auto">
-                    <label class="sr-only" for="inlineFormInput">Name</label>
-                    <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="">
+                    <label class="sr-only" for="string">Name</label>
+                    <input type="text" class="form-control mb-2" id="string" placeholder="">
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-dark" onclick="drawMT()">Dibujar</button>
+                    <button type="button" class="btn btn-dark" onclick="drawJump()">Dibujar</button>
                 </div>
             </div>
         </div>
 
 
-        <button type="button" class="btn btn-dark" id="myButton" onclick="drawMT()">
+        <button type="button" class="btn btn-dark" id="myButton" onclick="drawState()">
             Reiniciar</button>
     </div>
 
     <div class="container border border-dark">
-        <canvas id="myCanvas"></canvas>
+        <canvas id="myCanvas">
+        </canvas>
     </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
