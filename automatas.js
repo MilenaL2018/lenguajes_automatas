@@ -1,32 +1,9 @@
-
-/*document.getElementById("cargaCatalogo").addEventListener("click", cargarCatalogo);
-function cargarCatalogo() {
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            cargarXML(this);
-        }
-    };
-    xhr.open("GET", "catalogo.xml", true);
-    xhr.send();
-}
-function cargarXML(xml) {
-    var docXML = xml.responseXML;
-    var tabla = "<tr><th>Artista</th><th>Titulo</th></tr>";
-    var discos = docXML.getElementsByTagName("CD");
-    for (var i = 0; i < discos.length; i++) {
-        tabla += "<tr><td>";
-        tabla += discos[i].getElementsByTagName("ARTIST")[0].textContent;
-        tabla += "</td><td>";
-        tabla += discos[i].getElementsByTagName("TITLE")[0].textContent;
-        tabla += "</td></tr>";
-    }
-    document.getElementById("demo").innerHTML = tabla;
-}*/
-
 window.onload = function() {
     var fileInput = document.getElementById('inputFiles');
     var fileDisplayArea = document.getElementById('showData');
+    var testButton = document.getElementById('testButton');
+    var chainInput = document.getElementById('inlineFormInput');
+    let mijson;
 
     fileInput.addEventListener('change', function(e) {
         var file = fileInput.files[0];
@@ -41,15 +18,132 @@ window.onload = function() {
                 fileDisplayArea.innerText = reader.result;
                 mijson = JSON.parse(reader.result);
 
-                alert(mijson.alfabeto);
             };
 
         } else {
             fileDisplayArea.innerText = "File not supported!";
         }
     });
+
+    testButton.addEventListener('click', function (e){
+
+        let chain = chainInput.value;
+
+        if (mijson.automata === "AD"){
+
+            //Verifico que todos los caracteres de la cadena esten en el alfabeto
+            for (i = 0; i < chain.length; i++){
+                for (q = 0; q < mijson.alfabeto.length; q++){
+                    if (chain[i] == mijson.alfabeto[q]){
+                        break;
+                    }
+                    if (chain[i] !== mijson.alfabeto[q] && mijson.alfabeto[q] === mijson.alfabeto[mijson.alfabeto.length - 1] ){
+                        alert("Caracter incorrecto: " + chain[i]);
+                        return;
+                    }
+                }
+            }
+
+            //Verifico que el estado inicial sea usado
+            for (i = 0; i < mijson.transiciones.length; i++){
+                if (mijson.transiciones[i].actual == mijson.estadoInicial ){
+                    break;
+                }
+                if (mijson.transiciones[i].actual !== mijson.estadoInicial && mijson.transiciones[i] === mijson.transiciones[mijson.transiciones.length - 1]){
+                    alert("Estado inicial sin transicion definida");
+                    return;
+                }
+            }
+
+            let transicionOk = false;
+
+            for (i = 0; i < mijson.transiciones.length; i++){
+                //Verifico todos los estados
+                for (q = 0; q < mijson.estados.length; q++){
+                    if (mijson.transiciones[i].actual == mijson.estados[q]){
+                        for (p = 0; p < mijson.estados.length; p++){
+                            if (mijson.transiciones[i].proximo == mijson.estados[p]){
+                                transicionOk = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (transicionOk === true){
+                        transicionOk = false;
+                        break;
+                    }
+
+                    if (mijson.transiciones[i].actual !== mijson.estados[q] && mijson.transiciones[i].proximo !== mijson.estados[q] && mijson.estados[q] === mijson.estados[mijson.estados.length - 1]){
+                        alert("Error de estados en transiciones");
+                        return;
+                    }
+                }
+            }
+
+            for (i = 0; i < mijson.transiciones.length; i++){
+                //Verifico el alfabeto
+                for (w = 0; w < mijson.alfabeto.length; w++){
+                    if(mijson.transiciones[i].valor == mijson.alfabeto[w]){
+                        break;
+                    }
+                    if (mijson.transiciones[i].valor !== mijson.alfabeto[w] && mijson.alfabeto[w] === mijson.alfabeto[mijson.alfabeto.length - 1]){
+                        alert("Error de alfabeto en transiciones");
+                        return;
+                    }
+                }
+            }
+
+            transicionOk = false;
+
+
+            //Verifico los estados de salida
+            for (t = 0; t < mijson.estadosSalida.length; t++){
+                for (i = 0; i < mijson.transiciones.length; i++){
+                    if (mijson.transiciones[i].proximo == mijson.estadosSalida[t]){
+                        break;
+                    }
+
+                    if ( mijson.transiciones[i].proximo !== mijson.estadosSalida[t] && mijson.estadosSalida[t] === mijson.estadosSalida[mijson.estadosSalida.length - 1] && mijson.transiciones[i] === mijson.transiciones[mijson.transiciones.length - 1]){
+                        alert("Error en los estados de salida");
+                        return;
+                    }
+                }
+            }
+
+            let actualState = mijson.estadoInicial;
+
+            for (i = 0; i < chain.length; i++){
+                for (q = 0; q < mijson.transiciones.length; q++){
+                    if (mijson.transiciones[q].actual == actualState && mijson.transiciones[q].valor == chain[i]){
+                        actualState = mijson.transiciones[q].proximo;
+                        break;
+                    }
+                }
+            }
+
+            for (i = 0; i < mijson.estadosSalida.length; i++){
+                if( actualState == mijson.estadosSalida[i]){
+                    alert("Cadena Correcta");
+                    return;
+                }
+                if(actualState !== mijson.estadosSalida[i] && mijson.estadosSalida[i] === mijson.estadosSalida[mijson.estadosSalida.length - 1]){
+                    alert("Cadena Incorrecta");
+                    return;
+                }
+            }
+        }
+
+
+
+
+
+    });
 };
 
+
+
+/*
 
 onclick = function () {
     var canvas = document.getElementById('canvasId');
@@ -141,3 +235,4 @@ function drawMT(){
     console.log(canvas);
     ctx.clear(true)
 }
+*/

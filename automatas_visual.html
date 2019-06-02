@@ -41,22 +41,6 @@
 
     <div class="row justify-content-md-center">
         <div class="col-3 text-center myMenu">
-            <div class="card">
-                <div class="card-header alert alert-dark">Elija el autómata que quiera representar</div>
-                <div class="btn-group" role="group">
-                    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-
-                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <button type="button" class="btn btn-light" onclick="drawAFD()">
-                            Autómata Finito Determinista</button>
-                        <button type="button" class="btn btn-light" onclick="drawAP()">
-                            Autómata de Pila</button>
-                        <button type="button" class="btn btn-light" onclick="drawMT()">
-                            Máquina de Turing</button>
-                    </div>
-                </div>
-            </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                     <input type="file" id="inputFiles">
@@ -74,7 +58,7 @@
                     <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="">
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-dark" onclick="drawMT()">Dibujar</button>
+                    <button type="submit" class="btn btn-dark" id="testButton" >Probar</button>
                 </div>
             </div>
         </div>
