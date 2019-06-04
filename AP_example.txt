@@ -1,0 +1,44 @@
+{
+    "automata" : "AP",
+    "alfabeto": [ "0", "1", "l"],
+    "estadoInicial": "q0",
+    "estados": ["q0", "q1", "q2", "q3"],
+    "estadosSalida": ["q3"],
+    "transiciones": [
+                        {
+                           "actual": "q0",
+                           "valor": "0",
+                           "tope": "#",
+                           "apilo": "0",
+                           "proximo": "q1"
+                        },
+                                                {
+                           "actual": "q1",
+                           "valor": "0",
+                           "tope": "0",
+                           "apilo": "0",
+                           "proximo": "q1"
+                        },
+                        {
+                           "actual": "q1",
+                           "valor": "1",
+                           "tope": "0",
+                           "apilo": "l",
+                           "proximo": "q2"
+                        },
+                        {
+                           "actual": "q2",
+                           "valor": "1",
+                           "tope": "0",
+                           "apilo": "l",
+                           "proximo": "q2"
+                        },
+                        {
+                           "actual": "q2",
+                           "valor": "l",
+                           "tope": "#",
+                           "apilo": "",
+                           "proximo": "q3"
+                        }
+                     ]
+}
