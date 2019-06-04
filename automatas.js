@@ -132,7 +132,6 @@ window.onload = function() {
                 }
             }
         } else if (mijson.automata === "AP"){
-
             //Verifico que todos los caracteres de la cadena esten en el alfabeto
             for (i = 0; i < chain.length; i++){
                 for (q = 0; q < mijson.alfabeto.length; q++){
@@ -210,21 +209,42 @@ window.onload = function() {
                 }
             }
 
-            //Falta agregar la pila
+            //Recorro el automata
 
             let actualState = mijson.estadoInicial;
-            let pila = [];
+            let pila = ["#"];
 
             for (i = 0; i < chain.length; i++){
                 for (q = 0; q < mijson.transiciones.length; q++){
-                    if (mijson.transiciones[q].actual == actualState && mijson.transiciones[q].valor == chain[i]){
+
+                    if (mijson.transiciones[q].actual == actualState && mijson.transiciones[q].valor == chain[i] && mijson.transiciones[q].tope == pila[pila.length - 1]){
                         actualState = mijson.transiciones[q].proximo;
-                        if (mijson.valor){}
+
+                        if (mijson.transiciones[q].apilo == "l"){
+                            pila.pop();
+                            
+                            if (pila.length == 1){
+                                if (i === chain.length - 1){
+                                    alert(chain.length - 1 + " " + i);
+                                    for (w = 0; w < mijson.transiciones.length; w++){
+                                        if (mijson.transiciones[w].valor == "l"){
+                                            actualState = mijson.transiciones[w].proximo;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            pila.push(mijson.transiciones[q].apilo);
+                        }
+
                         break;
                     }
                 }
             }
 
+            alert(actualState);
+            //Verifico si da salida
             for (i = 0; i < mijson.estadosSalida.length; i++){
                 if( actualState == mijson.estadosSalida[i]){
                     alert("Cadena Correcta");
