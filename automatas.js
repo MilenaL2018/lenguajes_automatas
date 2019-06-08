@@ -1,39 +1,10 @@
 
-const data = {
-    "automata" : "AD",
-    "alfabeto": [ 0, 1 ],
-    "estadoInicial": "q0",
-    "estados": ["q0", "q1"],
-    "estadosSalida": ["q1"],
-    "transiciones": [
-        {
-            "actual": "q0",
-            "valor": 0,
-            "proximo": "q0"
-        },
-        {
-            "actual": "q0",
-            "valor": 1,
-            "proximo": "q1"
-        },
-        {
-            "actual": "q1",
-            "valor": 0,
-            "proximo": "q1"
-        },
-        {
-            "actual": "q1",
-            "valor": 1,
-            "proximo": "q0"
-        }
-    ]
-};
-
-
-
 window.onload = function() {
     var fileInput = document.getElementById('inputFiles');
     var fileDisplayArea = document.getElementById('showData');
+    var testButton = document.getElementById('testButton');
+    var chainInput = document.getElementById('inlineFormInput');
+    let mijson;
 
     fileInput.addEventListener('change', function(e) {
         var file = fileInput.files[0];
@@ -48,13 +19,249 @@ window.onload = function() {
                 fileDisplayArea.innerText = reader.result;
                 mijson = JSON.parse(reader.result);
 
-                alert(mijson.alfabeto);
             };
 
         } else {
             fileDisplayArea.innerText = "File not supported!";
         }
     });
-};
 
+    testButton.addEventListener('click', function (e){
+
+        let chain = chainInput.value;
+
+        if (mijson.automata === "AD"){
+
+            //Verifico que todos los caracteres de la cadena esten en el alfabeto
+            for (i = 0; i < chain.length; i++){
+                for (q = 0; q < mijson.alfabeto.length; q++){
+                    if (chain[i] == mijson.alfabeto[q]){
+                        break;
+                    }
+                    if (chain[i] !== mijson.alfabeto[q] && mijson.alfabeto[q] === mijson.alfabeto[mijson.alfabeto.length - 1] ){
+                        alert("Caracter incorrecto: " + chain[i]);
+                        return;
+                    }
+                }
+            }
+
+            //Verifico que el estado inicial sea usado
+            for (i = 0; i < mijson.transiciones.length; i++){
+                if (mijson.transiciones[i].actual == mijson.estadoInicial ){
+                    break;
+                }
+                if (mijson.transiciones[i].actual !== mijson.estadoInicial && mijson.transiciones[i] === mijson.transiciones[mijson.transiciones.length - 1]){
+                    alert("Estado inicial sin transicion definida");
+                    return;
+                }
+            }
+
+            let transicionOk = false;
+
+            for (i = 0; i < mijson.transiciones.length; i++){
+                //Verifico todos los estados
+                for (q = 0; q < mijson.estados.length; q++){
+                    if (mijson.transiciones[i].actual == mijson.estados[q]){
+                        for (p = 0; p < mijson.estados.length; p++){
+                            if (mijson.transiciones[i].proximo == mijson.estados[p]){
+                                transicionOk = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (transicionOk === true){
+                        transicionOk = false;
+                        break;
+                    }
+
+                    if (mijson.transiciones[i].actual !== mijson.estados[q] && mijson.transiciones[i].proximo !== mijson.estados[q] && mijson.estados[q] === mijson.estados[mijson.estados.length - 1]){
+                        alert("Error de estados en transiciones");
+                        return;
+                    }
+                }
+            }
+
+            for (i = 0; i < mijson.transiciones.length; i++){
+                //Verifico el alfabeto
+                for (w = 0; w < mijson.alfabeto.length; w++){
+                    if(mijson.transiciones[i].valor == mijson.alfabeto[w]){
+                        break;
+                    }
+                    if (mijson.transiciones[i].valor !== mijson.alfabeto[w] && mijson.alfabeto[w] === mijson.alfabeto[mijson.alfabeto.length - 1]){
+                        alert("Error de alfabeto en transiciones");
+                        return;
+                    }
+                }
+            }
+
+            //Verifico los estados de salida
+            for (t = 0; t < mijson.estadosSalida.length; t++){
+                for (i = 0; i < mijson.transiciones.length; i++){
+                    if (mijson.transiciones[i].proximo == mijson.estadosSalida[t]){
+                        break;
+                    }
+
+                    if ( mijson.transiciones[i].proximo !== mijson.estadosSalida[t] && mijson.estadosSalida[t] === mijson.estadosSalida[mijson.estadosSalida.length - 1] && mijson.transiciones[i] === mijson.transiciones[mijson.transiciones.length - 1]){
+                        alert("Error en los estados de salida");
+                        return;
+                    }
+                }
+            }
+
+
+            let actualState = mijson.estadoInicial;
+            //Recorro el automata
+            for (i = 0; i < chain.length; i++){
+                for (q = 0; q < mijson.transiciones.length; q++){
+                    if (mijson.transiciones[q].actual == actualState && mijson.transiciones[q].valor == chain[i]){
+                        actualState = mijson.transiciones[q].proximo;
+                        break;
+                    }
+                }
+            }
+
+            //Determino si da salida o no
+            for (i = 0; i < mijson.estadosSalida.length; i++){
+                if( actualState == mijson.estadosSalida[i]){
+                    alert("Cadena Correcta");
+                    return;
+                }
+                if(actualState !== mijson.estadosSalida[i] && mijson.estadosSalida[i] === mijson.estadosSalida[mijson.estadosSalida.length - 1]){
+                    alert("Cadena Incorrecta");
+                    return;
+                }
+            }
+        } else if (mijson.automata === "AP"){
+            //Verifico que todos los caracteres de la cadena esten en el alfabeto
+            for (i = 0; i < chain.length; i++){
+                for (q = 0; q < mijson.alfabeto.length; q++){
+                    if (chain[i] == mijson.alfabeto[q]){
+                        break;
+                    }
+                    if (chain[i] !== mijson.alfabeto[q] && mijson.alfabeto[q] === mijson.alfabeto[mijson.alfabeto.length - 1] ){
+                        alert("Caracter incorrecto: " + chain[i]);
+                        return;
+                    }
+                }
+            }
+
+            //Verifico que el estado inicial sea usado
+            for (i = 0; i < mijson.transiciones.length; i++){
+                if (mijson.transiciones[i].actual == mijson.estadoInicial ){
+                    break;
+                }
+                if (mijson.transiciones[i].actual !== mijson.estadoInicial && mijson.transiciones[i] === mijson.transiciones[mijson.transiciones.length - 1]){
+                    alert("Estado inicial sin transicion definida");
+                    return;
+                }
+            }
+
+            let transicionOk = false;
+
+            for (i = 0; i < mijson.transiciones.length; i++){
+                //Verifico todos los estados
+                for (q = 0; q < mijson.estados.length; q++){
+                    if (mijson.transiciones[i].actual == mijson.estados[q]){
+                        for (p = 0; p < mijson.estados.length; p++){
+                            if (mijson.transiciones[i].proximo == mijson.estados[p]){
+                                transicionOk = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (transicionOk === true){
+                        transicionOk = false;
+                        break;
+                    }
+
+                    if (mijson.transiciones[i].actual !== mijson.estados[q] && mijson.transiciones[i].proximo !== mijson.estados[q] && mijson.estados[q] === mijson.estados[mijson.estados.length - 1]){
+                        alert("Error de estados en transiciones");
+                        return;
+                    }
+                }
+            }
+
+            for (i = 0; i < mijson.transiciones.length; i++){
+                //Verifico el alfabeto
+                for (w = 0; w < mijson.alfabeto.length; w++){
+                    if(mijson.transiciones[i].valor == mijson.alfabeto[w]){
+                        break;
+                    }
+                    if (mijson.transiciones[i].valor !== mijson.alfabeto[w] && mijson.alfabeto[w] === mijson.alfabeto[mijson.alfabeto.length - 1]){
+                        alert("Error de alfabeto en transiciones");
+                        return;
+                    }
+                }
+            }
+
+            //Verifico los estados de salida
+            for (t = 0; t < mijson.estadosSalida.length; t++){
+                for (i = 0; i < mijson.transiciones.length; i++){
+                    if (mijson.transiciones[i].proximo == mijson.estadosSalida[t]){
+                        break;
+                    }
+
+                    if ( mijson.transiciones[i].proximo !== mijson.estadosSalida[t] && mijson.estadosSalida[t] === mijson.estadosSalida[mijson.estadosSalida.length - 1] && mijson.transiciones[i] === mijson.transiciones[mijson.transiciones.length - 1]){
+                        alert("Error en los estados de salida");
+                        return;
+                    }
+                }
+            }
+
+            //Recorro el automata
+
+            let actualState = mijson.estadoInicial;
+            let pila = ["#"];
+
+            for (i = 0; i < chain.length; i++){
+                for (q = 0; q < mijson.transiciones.length; q++){
+
+                    if (mijson.transiciones[q].actual == actualState && mijson.transiciones[q].valor == chain[i] && mijson.transiciones[q].tope == pila[pila.length - 1]){
+                        actualState = mijson.transiciones[q].proximo;
+
+                        if (mijson.transiciones[q].apilo == "l"){
+                            pila.pop();
+
+                            if (pila.length == 1){
+                                if (i === chain.length - 1){
+                                    alert(chain.length - 1 + " " + i);
+                                    for (w = 0; w < mijson.transiciones.length; w++){
+                                        if (mijson.transiciones[w].valor == "l"){
+                                            actualState = mijson.transiciones[w].proximo;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            pila.push(mijson.transiciones[q].apilo);
+                        }
+
+                        break;
+                    }
+                }
+            }
+
+            alert(actualState);
+            //Verifico si da salida
+            for (i = 0; i < mijson.estadosSalida.length; i++){
+                if( actualState == mijson.estadosSalida[i]){
+                    alert("Cadena Correcta");
+                    return;
+                }
+                if(actualState !== mijson.estadosSalida[i] && mijson.estadosSalida[i] === mijson.estadosSalida[mijson.estadosSalida.length - 1]){
+                    alert("Cadena Incorrecta");
+                    return;
+                }
+            }
+        }
+
+
+
+
+
+    });
+};
 

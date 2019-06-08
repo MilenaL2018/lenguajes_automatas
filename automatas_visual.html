@@ -8,98 +8,101 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="automatas.js"></script>
-    <script src="automata_diagram.js"></script>
     <link rel="stylesheet" href="automatas_style.css">
-    <script src="//d3js.org/d3.v4.min.js"></script>
-    <script src="https://unpkg.com/viz.js@1.8.1/viz.js" type="javascript/worker"></script>
-    <script src="https://unpkg.com/d3-graphviz@2.6.1/build/d3-graphviz.js"></script>
 </head>
 
+
 <body>
-
 <header>
-        <nav id="content" class="navbar bg-dark navbar-dark">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <nav id="content" class="navbar bg-dark navbar-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a href="#" class="text-light">
-                            Teoría sobre Autómata Finito Determinista</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="text-light">
-                            Teoría sobre Autómata de Pila</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="text-light">
-                            Teoría sobre Máquina de Turing</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-
-
-    <div class="row justify-content-md-center">
-        <div class="col-3 text-center myMenu">
-            <div class="card">
-                <div class="card-header alert alert-dark">Elija el autómata que quiera representar</div>
-                <div class="btn-group" role="group">
-                    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-
-                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <button type="button" class="btn btn-light" onclick="drawAFD()">
-                            Autómata Finito Determinista</button>
-                        <button type="button" class="btn btn-light" onclick="drawAP()">
-                            Autómata de Pila</button>
-                        <button type="button" class="btn btn-light" onclick="drawMT()">
-                            Máquina de Turing</button>
-                    </div>
-                </div>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                    <input type="file" id="inputFiles">
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="#" class="text-light">
+                        Teoría sobre Autómata Finito Determinista</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="text-light">
+                        Teoría sobre Autómata de Pila</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="text-light">
+                        Teoría sobre Máquina de Turing</a>
                 </li>
             </ul>
-            <div id="showData"></div>
         </div>
+    </nav>
+</header>
 
 
-        <div class="col-3 text-center myMenu">
-            <div class="card">
-                <div class="card-header alert alert-dark text-center">Ingrese cadena</div>
-                <div class="col-auto">
-                    <label class="sr-only" for="string">Name</label>
-                    <input type="text" class="form-control mb-2" id="string" placeholder="">
-                </div>
-                <div class="card-footer">
-                    <button type="button" class="btn btn-dark" onclick="drawJump()">Dibujar</button>
-                </div>
-            </div>
-        </div>
-
-
-        <button type="button" class="btn btn-dark" id="myButton" onclick="drawState()">
-            Reiniciar</button>
+<div class="row justify-content-md-center">
+    <div class="col-3 text-center myMenu">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <input type="file" id="inputFiles">
+            </li>
+        </ul>
+        <div id="showData"></div>
     </div>
 
-<script src="//d3js.org/d3.v4.min.js"></script>
+
+    <div class="col-3 text center myMenu">
+        <div class="card">
+            <div class="card-header alert alert-dark">Ingrese cadena</div>
+            <div class="col-auto">
+                <label class="sr-only" for="inlineFormInput">Name</label>
+                <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="">
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-dark" id="testButton" >Probar</button>
+            </div>
+        </div>
+    </div>
+
+
+    <button type="button" class="btn btn-dark" id="myButton" onclick="">
+        Reiniciar</button>
+</div>
+<script src="https://d3js.org/d3.v5.min.js"></script>
 <script src="https://unpkg.com/viz.js@1.8.1/viz.js" type="javascript/worker"></script>
 <script src="https://unpkg.com/d3-graphviz@2.6.1/build/d3-graphviz.js"></script>
-
-
 <div class="container border border-dark">
     <div id="machine"></div>
 </div>
+<script>
+    d3.select("#machine").graphviz()
+        .fade(false)
+        .renderDot(`digraph {
+                ordering=out;
+                rankdir=LR;
+                graph [fontname = "Open Sans"];
+                node [margin=0 width=0.5 shape=circle color="#211818" fillcolor="#F6ECEC" style=filled fontname = "Open Sans"];
+                edge [fontname="Open Sans" color="#211818"];
+                blank [style = invis, height=0, width=0, size=0, shape=point]
+                blank -> q0
+                q3 [shape=doublecircle]
+                q0 -> q1  [label = a];
+                q1 -> q2  [label = b];
+                q2 -> q3  [label = a];
+                q2 -> q3  [label = b];
+                q3 -> q4  [label = a];
+                q3 -> q3  [label = b];
+               q4 -> q4  [label = a];
+               q4 -> q5  [label = b];
+              q5 -> q4  [label = a];
+              q5 -> q4  [label = b];
+            }`)
 
-
-
-
+</script>
 </body>
-
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </html>
