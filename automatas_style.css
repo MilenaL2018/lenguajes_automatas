@@ -26,4 +26,21 @@ a{
     height: 4em;
 }
 
+.node circle {
+    width: 100px;
+    height: 100px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    background: #5cb85c;
 
+}
+
+.node text { font: 12px sans-serif; }
+
+
+.link {
+    fill: black;
+    stroke: #ccc;
+    stroke-width: 1px;
+}
