@@ -74,6 +74,11 @@
     <div id="machine"></div>
 </div>
 <script>
+
+
+    //qinitial = myjason['transiciones.actual'];
+    // qnext = myjason['transiciones.proximo'];
+
     d3.select("#machine").graphviz()
         .fade(false)
         .renderDot(`digraph {
@@ -84,17 +89,17 @@
                 edge [fontname="Open Sans" color="#211818"];
                 blank [style = invis, height=0, width=0, size=0, shape=point]
                 blank -> q0
-                q3 [shape=doublecircle]
-                q0 -> q1  [label = a];
-                q1 -> q2  [label = b];
-                q2 -> q3  [label = a];
-                q2 -> q3  [label = b];
-                q3 -> q4  [label = a];
-                q3 -> q3  [label = b];
-               q4 -> q4  [label = a];
-               q4 -> q5  [label = b];
-              q5 -> q4  [label = a];
-              q5 -> q4  [label = b];
+                qs = myjason['estadosSalida'] [shape=doublecircle]
+                q0 -> q1  [label = myjason['valor']];
+                qinitial -> qnext  [label = myjason['valor']];
+                qinitial -> qnext  [label = myjason['valor']];
+                qinitial -> qnext  [label = myjason['valor']];
+                qinitial -> qnext  [label = myjason['valor']];
+                qinitial -> qnext  [label = myjason['valor']];
+                qinitial -> qnext  [label = myjason['valor']];
+                qinitial -> qnext  [label = myjason['valor']];
+                qinitial -> qnext  [label = myjason['valor']];
+                qinitial -> qnext  [label = myjason['valor']];
             }`)
 
 </script>
