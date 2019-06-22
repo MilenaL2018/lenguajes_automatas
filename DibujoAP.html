@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="javascript">
 
@@ -7,10 +6,8 @@
     <title>Automatas</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="automatas.js"></script>
     <link rel="stylesheet" href="automatas_style.css">
 </head>
-
 
 <body>
 <header>
@@ -22,16 +19,16 @@
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="#" class="text-light">
+                    <a href="DibujoMT.html" class="text-light">
+                        Teoría sobre Máquina de Turing</a>
+                </li>
+                <li class="nav-item">
+                    <a href="AFD.html" class="text-light">
                         Teoría sobre Autómata Finito Determinista</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="text-light">
-                        Teoría sobre Autómata de Pila</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="text-light">
-                        Teoría sobre Máquina de Turing</a>
+                    <a href="automatas_visual.html" class="text-light">
+                        Probar autómata</a>
                 </li>
             </ul>
         </div>
@@ -39,46 +36,94 @@
 </header>
 
 
-<div class="row justify-content-md-center">
-    <div class="col-3 text-center myMenu">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-                <input type="file" id="inputFiles">
-            </li>
-        </ul>
-        <div id="showData"></div>
+<div class="container-fluid">
+    <div class="card-header m-3">
+        Autómata de Pila
+    </div>
+    <div class="card-body p-0">
+        AP= (Σ, Γ, Q, A0, q0, f, F)
+    </div>
+    <div class="card-body p-0">
+        Siendo:
+        Σ es el alfabeto de entrada.
+    </div>
+    <div class="card-body p-0">
+        Γ es el alfabeto de la pila.
+    </div>
+    <div class="card-body p-0">
+        Q es un conjunto finito de estados
+    </div>
+    <div class="card-body p-0">
+        A0 ∈ Γ es el símbolo inicial de la pila
+    </div>
+    <div class="card-body p-0">
+        q0 ∈ Q el estado inicial del autómata
+
+    </div>
+    <div class="card-body p-0">
+        F ⊆ Q es el subconjunto de estados finales
+    </div>
+    <div class="card-body p-0">
+        f es una función de transición.
+    </div>
+    <div class="card-body p-0">
+        Un AP comienza su funcionamiento:
+        en el estado inicial (q0), con sólo un símbolo en la pila (A0) y
+        con la cabeza lectora en el primer símbolo de la entrada.
+    </div>
+    <div class="card-header m-3">Representación del Autómata</div>
+    <div class="card-body p-0">
+        La interpretación de f es:
+    </div>
+    <div class="card-body p-0">
+        a) f(q, a, A) = {(q1, Z1), (q2, Z2),... (qn, Zn)}
+    </div>
+    <div class="card-body p-0">
+        cuando el autómata se encuentra en el estado q, lee el símbolo
+        de entrada a y tiene el símbolo
+    </div>
+    <div class="card-body p-0">
+        A en la cima de la pila; el autómata pasará a algún estado qi,
+        eliminará el símbolo A de la pila e
+    </div>
+    <div class="card-body p-0">
+        introducirá en
+        ella la palabra Zi , quedando la cabeza de Zi en la cima de la
+        pila.
+    </div>
+    <div class="card-body p-0">
+      b) f(q, λ, A) = {(q1, Z1), (q2, Z2),... (qn, Zn)}
+    </div>
+    <div class="card-body p-0">
+        cuando el autómata se encuentra en el estado q, y tiene el
+        símbolo A en la cima de la pila;
+
+    </div>
+    <div class="card-body p-0">
+        el autómata pasará a algún
+        estado qi, eliminará el símbolo A de la pila e
+
+    </div>
+    <div class="card-body p-0">
+        introducirá en ella la palabra Zi , quedando la
+        cabeza de Zi en la cima de la pila.
     </div>
 
-
-    <div class="col-3 text center myMenu">
-        <div class="card">
-            <div class="card-header alert alert-dark">Ingrese cadena</div>
-            <div class="col-auto">
-                <label class="sr-only" for="inlineFormInput">Name</label>
-                <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="">
-            </div>
-            <div class="card-footer">
-                <button type="submit" class="btn btn-dark" id="testButton" >Probar</button>
-            </div>
-        </div>
+    <div class="card-body p-0">
+        Para representar las transiciones se usan flechas con los valores permitidos del alfabeto.
     </div>
 
-
-    <button type="button" class="btn btn-dark" id="myButton" onclick="">
-        Reiniciar</button>
+    <div class="card-header m-3">Ejemplo</div>
 </div>
+<div class="container border border-dark m-3">
+    <div id="machine"></div>
+</div>
+
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script src="https://unpkg.com/viz.js@1.8.1/viz.js" type="javascript/worker"></script>
 <script src="https://unpkg.com/d3-graphviz@2.6.1/build/d3-graphviz.js"></script>
-<div class="container border border-dark">
-    <div id="machine"></div>
-</div>
+
 <script>
-
-
-    //qinitial = myjason['transiciones.actual'];
-    // qnext = myjason['transiciones.proximo'];
-
     d3.select("#machine").graphviz()
         .fade(false)
         .renderDot(`digraph {
@@ -89,11 +134,15 @@
                 edge [fontname="Open Sans" color="#211818"];
                 blank [style = invis, height=0, width=0, size=0, shape=point]
                 blank -> q0
-                qs = myjason['estadosSalida'] [shape=doublecircle]
-                qinitial -> qnext   [label = myjason['valor'], myjason['tope']; myjason['apilo']];
-                qinitial -> qnext   [label = myjason['valor'], myjason['tope']; myjason['apilo']];
-                qinitial -> qnext   [label = myjason['valor'], myjason['tope']; myjason['apilo']];
-                }`)
+                q3  [shape=doublecircle]
+                q0 [fillcolor="#8BC34A" color="#8BC34A"]
+                q0 -> q1 [label="λ, λ; #"]
+                q1-> q1 [label="a, a; aa"]
+                q1 -> q2 [label="b, a; λ"]
+                q2 -> q2 [label="b,a; λ"]
+                q2 -> q3 [label="b, #; λ"]
+
+            }`)
 
 </script>
 </body>

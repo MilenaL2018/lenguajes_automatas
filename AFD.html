@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="javascript">
 
@@ -19,8 +20,8 @@
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="AFD.html" class="text-light">
-                        Teoría sobre Autómata Finito Determinista</a>
+                    <a href="DibujoMT.html" class="text-light">
+                        Teoría sobre Máquina de Turing</a>
                 </li>
                 <li class="nav-item">
                     <a href="DibujoAP.html" class="text-light">
@@ -28,7 +29,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="automatas_visual.html" class="text-light">
-                        Probar autómata</a>
+                       Probar autómata</a>
                 </li>
             </ul>
         </div>
@@ -38,61 +39,60 @@
 
 <div class="container-fluid">
     <div class="card-header m-3">
-        Máquina de Turing
+        Autómata Finito Determinista
     </div>
     <div class="card-body p-0">
-        M = (Q,Σ,T,δ,q0,B,F)
+        A = ( Q , Σ , δ , q 0 , F )
     </div>
     <div class="card-body p-0">
         Siendo:
-        Q el conjunto de estados.
+        Q el conjunto finito de estados.
     </div>
     <div class="card-body p-0">
-        Σ  es el alfabeto: el conjunto finito de símbolos de entrada.
+        Σ el alfabeto, es decir, un conjunto finito de símbolos que formarán palabras o cadenas.
     </div>
     <div class="card-body p-0">
-        Τ es el conjunto de símbolos de cinta. El alfabeto es un subconjunto de Τ.
+        δ es la función de transición. Determina el comportamiento del autómata.
     </div>
     <div class="card-body p-0">
-        q0 es el estado inicial: el estado en el que se encuentra inicialmente la MT.
+        F es el subconjunto de Q, que contiene los estados de finales,
+        que son los estados que provocan la parada del autómata.
     </div>
     <div class="card-body p-0">
-        B es un elemento de Σ: el símbolo en blanco.
-
-    </div>
-    <div class="card-body p-0">
-        Se encuentra en todas las casillas de la cinta que no tienen un símbolo de entrada.
-    </div>
-    <div class="card-body p-0">
-        F es el conjunto de estados finales.
-    </div>
-    <div class="card-body p-0">
-        δ es la función de transiciones.
+        Cuando se llega a uno de estos estados a través de una palabra w,
+        diremos que es una palabra del lenguaje del autómata.
     </div>
 
-    <div class="card-header m-3">Representación de la Máquina</div>
+    <div class="card-header m-3">Representación del Autómata</div>
     <div class="card-body p-0">
-        Representaremos los estados
-        mediante círculos que encierran el nombre del estado. En este caso son {q0, q1, q2, q3, q4, q5}
-    </div>
-    <div class="card-body p-0">
-        Los circulos de los estados de aceptación tienen el borde doble. En este caso, {q4}.
+        Representaremos los estados del AFD
+        mediante círculos que encierran el nombre del estado. En este caso son {q0, q1, q2}.
     </div>
     <div class="card-body p-0">
-        El alfabeto del autómata es Σ = {a,b} y la cinta está formada por infinitas casillas.
+    Los circulos de los estados de aceptación tienen el borde doble. En este caso, {q3}.
     </div>
     <div class="card-body p-0">
-        La expresión
-        δ ( q , X ) = ( p , Y , D ) indica que en el estado q, si la cabeza
+        El alfabeto del autómata es Σ = {a,b}
     </div>
     <div class="card-body p-0">
-        señala al símbolo de cinta X, entonces la MT escribe el símbolo de cinta Y en la
+        La función de transición es:
     </div>
     <div class="card-body p-0">
-        actual (cambia X por Y ) y mueve la cabeza una casilla hacia D (D puede ser derecha, R;
+        δ (q0,a) = q1
     </div>
-    <div class="card-body p-0"> o izquierda, L) y pasa al estado p.
+    <div class="card-body p-0">
+        δ (q0,b) = q2
     </div>
+    <div class="card-body p-0">
+        δ (q1,a) = q 1
+    </div>
+    <div class="card-body p-0">
+        δ (q1,b) = q 2
+    </div>
+    <div class="card-body p-0">
+        Para representar las transiciones se usan flechas con los valores permitidos del alfabeto.
+    </div>
+
     <div class="card-header m-3">Ejemplo</div>
 </div>
 <div class="container border border-dark m-3">
@@ -114,16 +114,12 @@
                 edge [fontname="Open Sans" color="#211818"];
                 blank [style = invis, height=0, width=0, size=0, shape=point]
                 blank -> q0
-                q4  [shape=doublecircle]
+                q2  [shape=doublecircle]
                 q0 [fillcolor="#8BC34A" color="#8BC34A"]
-                q0 -> q0 [label= "0, D; 0"]
-                q0-> q1 [label="b, I; b"]
-                q1 -> q2 [label="1, I; 0"]
-                q1 -> q3 [label="0, I; 1"]
-                q3 -> q3 [label="0, I; 0 / 1, I; 1"]
-                q2 -> q5 [label="b, I; 1"]
-                q3 -> q4 [label="b, P; b"]
-                q5-> q4 [label="b, P; b"]
+                q0 -> q1 [label= a]
+                q1-> q1 [label=a]
+                q1 -> q2 [label=b]
+                q0 -> q2 [label=b]
 
             }`)
 
