@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="javascript">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Automatas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="automatas_style.css">
+</head>
+
+<body>
+<header>
+    <nav id="content" class="navbar bg-dark navbar-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="DibujoMT.html" class="text-light">
+                        Teoría sobre Máquina de Turing</a>
+                </li>
+                <li class="nav-item">
+                    <a href="DibujoAP.html" class="text-light">
+                        Teoría sobre Autómata de Pila</a>
+                </li>
+                <li class="nav-item">
+                    <a href="automatas_visual.html" class="text-light">
+                       Probar autómata</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+
+<div class="container-fluid">
+    <div class="card-header m-3">
+        Autómata Finito Determinista
+    </div>
+    <div class="card-body p-0">
+        A = ( Q , Σ , δ , q 0 , F )
+    </div>
+    <div class="card-body p-0">
+        Siendo:
+        Q el conjunto finito de estados.
+    </div>
+    <div class="card-body p-0">
+        Σ el alfabeto, es decir, un conjunto finito de símbolos que formarán palabras o cadenas.
+    </div>
+    <div class="card-body p-0">
+        δ es la función de transición. Determina el comportamiento del autómata.
+    </div>
+    <div class="card-body p-0">
+        F es el subconjunto de Q, que contiene los estados de finales,
+        que son los estados que provocan la parada del autómata.
+    </div>
+    <div class="card-body p-0">
+        Cuando se llega a uno de estos estados a través de una palabra w,
+        diremos que es una palabra del lenguaje del autómata.
+    </div>
+
+    <div class="card-header m-3">Representación del Autómata</div>
+    <div class="card-body p-0">
+        Representaremos los estados del AFD
+        mediante círculos que encierran el nombre del estado. En este caso son {q0, q1, q2}.
+    </div>
+    <div class="card-body p-0">
+    Los circulos de los estados de aceptación tienen el borde doble. En este caso, {q3}.
+    </div>
+    <div class="card-body p-0">
+        El alfabeto del autómata es Σ = {a,b}
+    </div>
+    <div class="card-body p-0">
+        La función de transición es:
+    </div>
+    <div class="card-body p-0">
+        δ (q0,a) = q1
+    </div>
+    <div class="card-body p-0">
+        δ (q0,b) = q2
+    </div>
+    <div class="card-body p-0">
+        δ (q1,a) = q 1
+    </div>
+    <div class="card-body p-0">
+        δ (q1,b) = q 2
+    </div>
+    <div class="card-body p-0">
+        Para representar las transiciones se usan flechas con los valores permitidos del alfabeto.
+    </div>
+
+    <div class="card-header m-3">Ejemplo</div>
+</div>
+<div class="container border border-dark m-3">
+    <div id="machine"></div>
+</div>
+
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="https://unpkg.com/viz.js@1.8.1/viz.js" type="javascript/worker"></script>
+<script src="https://unpkg.com/d3-graphviz@2.6.1/build/d3-graphviz.js"></script>
+
+<script>
+    d3.select("#machine").graphviz()
+        .fade(false)
+        .renderDot(`digraph {
+                ordering=out;
+                rankdir=LR;
+                graph [fontname = "Open Sans"];
+                node [margin=0 width=0.5 shape=circle color="#211818" fillcolor="#F6ECEC" style=filled fontname = "Open Sans"];
+                edge [fontname="Open Sans" color="#211818"];
+                blank [style = invis, height=0, width=0, size=0, shape=point]
+                blank -> q0
+                q2  [shape=doublecircle]
+                q0 [fillcolor="#8BC34A" color="#8BC34A"]
+                q0 -> q1 [label= a]
+                q1-> q1 [label=a]
+                q1 -> q2 [label=b]
+                q0 -> q2 [label=b]
+
+            }`)
+
+</script>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</html>
