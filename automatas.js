@@ -26,7 +26,7 @@ window.onload = function() {
         }
     });
 
-    testButton.addEventListener('click', function (e){
+    testButton.addEventListener('click', async function (e){
 
         let chain = chainInput.value;
 
@@ -116,6 +116,10 @@ window.onload = function() {
                 for (q = 0; q < mijson.transiciones.length; q++){
                     if (mijson.transiciones[q].actual == actualState && mijson.transiciones[q].valor == chain[i]){
                         actualState = mijson.transiciones[q].proximo;
+
+                        var edges = mijson['transiciones'].map( (e) => `${e["actual"]} ->  ${e["proximo"]} [label="${e.valor}"]`);
+                        await sleep(1500);
+                        draw(mijson.estadoInicial, mijson.estadosSalida, actualState, edges);
                         break;
                     }
                 }
@@ -220,6 +224,10 @@ window.onload = function() {
 
                     if (mijson.transiciones[q].actual == actualState && mijson.transiciones[q].valor == chain[i] && mijson.transiciones[q].tope == pila[pila.length - 1]){
                         actualState = mijson.transiciones[q].proximo;
+                        console.log("hola");
+                        var edges = mijson['transiciones'].map( (e) => `${e["actual"]} ->  ${e["proximo"]} [label="${e.valor}, ${e.tope}; ${e.apilo}"]`);
+                        await sleep(1500);
+                        draw(mijson.estadoInicial, mijson.estadosSalida, actualState, edges);
 
                         if (mijson.transiciones[q].apilo == "l"){
                             pila.pop();
@@ -230,6 +238,10 @@ window.onload = function() {
                                     for (w = 0; w < mijson.transiciones.length; w++){
                                         if (mijson.transiciones[w].valor == "l"){
                                             actualState = mijson.transiciones[w].proximo;
+                                            console.log("hola");
+                                            var edges = mijson['transiciones'].map( (e) => `${e["actual"]} ->  ${e["proximo"]} [label="${e.valor}, ${e.tope}; ${e.apilo}"]`);
+                                            await sleep(1500);
+                                            draw(mijson.estadoInicial, mijson.estadosSalida, actualState, edges);
                                             break;
                                         }
                                     }
@@ -244,7 +256,7 @@ window.onload = function() {
                 }
             }
 
-            alert(actualState);
+            //alert(actualState);
             //Verifico si da salida
             for (i = 0; i < mijson.estadosSalida.length; i++){
                 if( actualState == mijson.estadosSalida[i]){
