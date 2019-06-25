@@ -231,7 +231,6 @@ window.onload = function() {
 
                     if (mijson.transiciones[q].actual == actualState && mijson.transiciones[q].valor == chain[i] && mijson.transiciones[q].tope == pila[pila.length - 1]){
                         actualState = mijson.transiciones[q].proximo;
-                        console.log("hola");
                         var edges = mijson['transiciones'].map( (e) => `${e["actual"]} ->  ${e["proximo"]} [label="${e.valor}, ${e.tope}; ${e.apilo}"]`);
                         await sleep(1500);
                         draw(mijson.estadoInicial, mijson.estadosSalida, actualState, edges);
@@ -245,7 +244,6 @@ window.onload = function() {
                                     for (w = 0; w < mijson.transiciones.length; w++){
                                         if (mijson.transiciones[w].valor == "l"){
                                             actualState = mijson.transiciones[w].proximo;
-                                            console.log("hola");
                                             var edges = mijson['transiciones'].map( (e) => `${e["actual"]} ->  ${e["proximo"]} [label="${e.valor}, ${e.tope}; ${e.apilo}"]`);
                                             await sleep(1500);
                                             draw(mijson.estadoInicial, mijson.estadosSalida, actualState, edges);
@@ -331,7 +329,7 @@ window.onload = function() {
 
             for (i = 0; i < mijson.transiciones.length; i++){
                 //Verifico el alfabeto
-                for (w = 0; w < mijson.alfaalfabetoDeCintabeto.length; w++){
+                for (w = 0; w < mijson.alfabetoDeCinta.length; w++){
                     if(mijson.transiciones[i].valor == mijson.alfabetoDeCinta[w]){
                         break;
                     }
