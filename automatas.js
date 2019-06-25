@@ -17,7 +17,6 @@ window.onload = function() {
 
             reader.onload = function(e) {
                 fileDisplayArea.innerText = reader.result;
-                alert(reader.result);
                 mijson = JSON.parse(reader.result);
 
             };
@@ -31,7 +30,11 @@ window.onload = function() {
 
         let chain = chainInput.value;
 
+        alert(mijson.automata);
+
         if (mijson.automata === "AD"){
+
+            alert("ad");
 
             //Verifico que todos los caracteres de la cadena esten en el alfabeto
             for (i = 0; i < chain.length; i++){
@@ -134,6 +137,9 @@ window.onload = function() {
                 }
             }
         } else if (mijson.automata === "AP"){
+
+            alert("pila");
+
             //Verifico que todos los caracteres de la cadena esten en el alfabeto
             for (i = 0; i < chain.length; i++){
                 for (q = 0; q < mijson.alfabeto.length; q++){
@@ -258,6 +264,9 @@ window.onload = function() {
                 }
             }
         } else if (mijson.automata === "MT"){
+
+            alert("turing");
+
             //Verifico que todos los caracteres de la cinta esten en el alfabeto
             for (i = 0; i < mijson.cinta.length; i++){
                 for (q = 0; q < mijson.alfabetoDeCinta.length; q++){
@@ -350,6 +359,11 @@ window.onload = function() {
 
                     if(mijson.transiciones[q].direccion == "I"){
                         if(index > 0){
+                            if(index == cinta.length - 1){
+                                if(mijson.transiciones[q].escribo == "b"){
+                                    cinta.pop();
+                                }
+                            }
                             index--;
                         } else {
                             index = 0;
@@ -374,15 +388,11 @@ window.onload = function() {
 
             if(!error){
                 //Verifico si da salida si no hubo un error antes
-                for (i = 0; i < mijson.estadosSalida.length; i++){
-                    if( actualState == mijson.estadosSalida[i]){
-                        alert("Cadena Correcta");
-                        return;
-                    }
-                    if(actualState !== mijson.estadosSalida[i] && mijson.estadosSalida[i] === mijson.estadosSalida[mijson.estadosSalida.length - 1]){
-                        alert("Cadena Incorrecta");
-                        return;
-                    }
+
+                if( actualState == mijson.estadoSalida){
+                    alert("Cadena Correcta");
+                } else {
+                    alert("Cadena Incorrecta");
                 }
             }
         }
