@@ -12,12 +12,12 @@ function draw(start, end, current_status, edges){
                 ordering=out;
                 rankdir=LR;
                 graph [fontname = "helvetica"];
-                node [margin=0 width=0.5 shape=circle color="#00BCD4" fillcolor="#00BCD4" style=filled fontname = "helvetica"];
-                edge [fontname="helvetica" color="#005291"];
+                node [margin=0 width=0.5 shape=circle color="#00BCD4" fillcolor="#33FFFF" style=filled fontname = "helvetica"];
+                edge [fontname="helvetica" color="#040707"];
                 blank [style = invis, height=0, width=0, size=0, shape=point]
-                blank -> ${start} [label="start"]
+                blank -> ${start} 
                 ${end.map( (e) => { return `${e} [shape=doublecircle]`; } ).join('\n')}
-                ${current_status} [fillcolor="#8BC34A" color="#8BC34A"]
+                ${current_status} [fillcolor="#5C5FD8" color="#5C5FD8"]
                 ${edges.flat().join('\n')}
             }
             `)

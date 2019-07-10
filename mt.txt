@@ -1,0 +1,143 @@
+{
+    "automata" : "MT",
+    "alfabetoDeCinta": [ 0, 1, "*", "a"],
+    "estadoInicial": "q0",
+    "estados": ["q0", "q1", "q2", "q3", "q4", "q5"],
+    "estadoSalida": "q5",
+    "cinta": [0, 1, "*"],
+    "transiciones": [
+                        {
+                           "actual": "q0",
+                           "valor": 0,
+                           "direccion": "D",
+                           "escribo": "a",
+                           "proximo": "q1"
+                        },
+                        {
+                           "actual": "q0",
+                           "valor": 1,
+                           "direccion": "D",
+                           "escribo": "a",
+                           "proximo": "q1"
+                        },
+                        {
+                           "actual": "q0",
+                           "valor": "*",
+                           "direccion": "D",
+                           "escribo": "*",
+                           "proximo": "q5"
+                        },
+                        {
+                           "actual": "q1",
+                           "valor": 0,
+                           "direccion": "D",
+                           "escribo": 0,
+                           "proximo": "q1"
+                        },
+                        {
+                           "actual": "q1",
+                           "valor": 1,
+                           "direccion": "D",
+                           "escribo": 1,
+                           "proximo": "q1"
+                        },
+                        {
+                           "actual": "q1",
+                           "valor": "*",
+                           "direccion": "D",
+                           "escribo": "*",
+                           "proximo": "q1"
+                        },
+                        {
+                           "actual": "q1",
+                           "valor": "b",
+                           "direccion": "I",
+                           "escribo": 0,
+                           "proximo": "q2"
+                        },
+                        {
+                           "actual": "q2",
+                           "valor": 1,
+                           "direccion": "I",
+                           "escribo": 1,
+                           "proximo": "q2"
+                        },
+                        {
+                           "actual": "q2",
+                           "valor": "*",
+                           "direccion": "I",
+                           "escribo": "*",
+                           "proximo": "q2"
+                        },
+                        {
+                           "actual": "q2",
+                           "valor": 0,
+                           "direccion": "I",
+                           "escribo": 0,
+                           "proximo": "q2"
+                        },
+                        {
+                           "actual": "q2",
+                           "valor": "a",
+                           "direccion": "D",
+                           "escribo": 0,
+                           "proximo": "q0"
+                        },
+                        {
+                           "actual": "q3",
+                           "valor": 0,
+                           "direccion": "D",
+                           "escribo": 0,
+                           "proximo": "q3"
+                        },
+                        {
+                           "actual": "q3",
+                           "valor": 1,
+                           "direccion": "D",
+                           "escribo": 1,
+                           "proximo": "q3"
+                        },
+                        {
+                           "actual": "q3",
+                           "valor": "*",
+                           "direccion": "D",
+                           "escribo": "*",
+                           "proximo": "q3"
+                        },
+                        {
+                           "actual": "q3",
+                           "valor": "b",
+                           "direccion": "I",
+                           "escribo": 1,
+                           "proximo": "q4"
+                        },
+                        {
+                           "actual": "q4",
+                           "valor": 1,
+                           "direccion": "I",
+                           "escribo": 1,
+                           "proximo": "q4"
+                        },
+                        {
+                           "actual": "q4",
+                           "valor": "*",
+                           "direccion": "I",
+                           "escribo": "*",
+                           "proximo": "q4"
+                        },
+                        {
+                           "actual": "q4",
+                           "valor": 0,
+                           "direccion": "I",
+                           "escribo": 0,
+                           "proximo": "q4"
+                        },
+                        {
+                           "actual": "q4",
+                           "valor": "a",
+                           "direccion": "D",
+                           "escribo": 1,
+                           "proximo": "q0"
+                        }
+                     ]
+}
