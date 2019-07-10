@@ -10,7 +10,7 @@
                            "valor": 0,
                            "proximo": "q0"
                         },
-                                                {
+                        {
                            "actual": "q0",
                            "valor": 1,
                            "proximo": "q1"
@@ -20,7 +20,7 @@
                            "valor": 0,
                            "proximo": "q1"
                         },
-                                                {
+                        {
                            "actual": "q1",
                            "valor": 1,
                            "proximo": "q0"
